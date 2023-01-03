@@ -4,12 +4,18 @@ package spring.agenda.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import spring.agenda.domain.Endereco;
 import spring.agenda.domain.Pessoa;
 import spring.agenda.dto.PessoaDTO;
+import spring.agenda.repository.EnderecoRepository;
 import spring.agenda.repository.PessoaRepository;
 import spring.agenda.service.exceptions.DataBaseException;
 import spring.agenda.service.exceptions.ObjectNotFoundException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -20,6 +26,9 @@ public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     public PessoaDTO findByID(Long id) {
         try {
@@ -38,16 +47,19 @@ public class PessoaService {
         return list.stream().map(x -> new PessoaDTO(x)).collect(Collectors.toList());
     }
 
-    public List<PessoaDTO> buscarPessoasMostrarContatos() {
+    public List<PessoaDTO> buscarPessoasComMostrarContatos() {
         List<Pessoa> list = pessoaRepository.findAll();
         return list.stream().map(x -> new PessoaDTO(x)).collect(Collectors.toList());
     }
 
     public PessoaDTO salvarPessoa(PessoaDTO pessoaDTO) {
-
-        Pessoa entity = new Pessoa();
-        convertDTOtoEntity(entity, pessoaDTO);
-        return new PessoaDTO(pessoaRepository.save(entity));
+        try {
+            Pessoa entity = new Pessoa();
+            convertDTOtoEntity(entity, pessoaDTO);
+            return new PessoaDTO(pessoaRepository.save(entity));
+        } catch (DateTimeParseException e){
+            throw new DataBaseException("FORMATO DE DATA INCORRETO. CORRETO \"10/10/2023\"");
+        }
     }
 
     public PessoaDTO atualizarPessoa(Long id, PessoaDTO pessoaDTO) {
@@ -71,7 +83,7 @@ public class PessoaService {
 
     public void convertDTOtoEntity(Pessoa entity, PessoaDTO pessoaDTO) {
         entity.setNomePessoa(pessoaDTO.getNomePessoa());
-        entity.setDataNascimento(pessoaDTO.getDataNascimento());
+        entity.setDataNascimento(LocalDate.parse(pessoaDTO.getDataNascimento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     public void validacaoExclusaoPessoa(Long id) {
