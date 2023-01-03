@@ -6,7 +6,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,16 +27,16 @@ public class Pessoa {
 
     @DateTimeFormat(pattern = "01-01-2000")
     @Column(name = "PES_DATA_NASCIMENTO")
-    private LocalDateTime dataNascimento;
+    private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<Endereco> endereco;
+    private List<Endereco> endereco = new ArrayList<>();
 
     public Pessoa(){
 
     }
 
-    public Pessoa(Long idPessoa, String nomePessoa, LocalDateTime dataNascimento, List<Endereco> endereco) {
+    public Pessoa(Long idPessoa, String nomePessoa, LocalDate dataNascimento, List<Endereco> endereco) {
         this.idPessoa = idPessoa;
         this.nomePessoa = nomePessoa;
         this.dataNascimento = dataNascimento;
@@ -56,12 +59,16 @@ public class Pessoa {
         this.nomePessoa = nomePessoa;
     }
 
-    public LocalDateTime getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDateTime dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public String getDataNascimentoFormatada() {
+        return dataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public List<Endereco> getEndereco() {
