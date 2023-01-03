@@ -1,48 +1,52 @@
 package spring.agenda.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import spring.agenda.domain.Endereco;
+import org.springframework.format.annotation.DateTimeFormat;
 import spring.agenda.domain.Pessoa;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class PessoaDTO {
 
-    private Long idPessoa;
+    private Long id;
 
     private String nomePessoa;
 
-    private LocalDateTime dataNascimento;
+    private String dataNascimento;
 
-    @JsonIgnore
-    private List<Endereco> endereco;
+    private List<EnderecoDTO> enderecos;
 
     public PessoaDTO(){
 
     }
 
-    public PessoaDTO(Long idPessoa, String nomePessoa, LocalDateTime dataNascimento, List<Endereco> endereco) {
-        this.idPessoa = idPessoa;
+    public PessoaDTO(Long id, String nomePessoa, String dataNascimento, List<EnderecoDTO> enderecos) {
+        this.id = id;
         this.nomePessoa = nomePessoa;
         this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
+        this.enderecos = enderecos;
     }
 
     public PessoaDTO(Pessoa entity) {
-        this.idPessoa = entity.getIdPessoa();
+        this.id = entity.getIdPessoa();
         this.nomePessoa = entity.getNomePessoa();
-        this.dataNascimento = entity.getDataNascimento();
-        this.endereco = entity.getEndereco();
+        this.dataNascimento = entity.getDataNascimentoFormatada();
+        this.enderecos = entity.getEndereco().stream().map(x -> new EnderecoDTO(x)).collect(Collectors.toList());
     }
 
-    public Long getIdPessoa() {
-        return idPessoa;
+    public PessoaDTO(Pessoa entity, List<EnderecoDTO> enderecos) {
+        this.id = entity.getIdPessoa();
+        this.nomePessoa = entity.getNomePessoa();
+        this.dataNascimento = entity.getDataNascimentoFormatada();
+        this.enderecos = enderecos;
     }
 
-    public void setIdPessoa(Long idPessoa) {
-        this.idPessoa = idPessoa;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNomePessoa() {
@@ -53,32 +57,19 @@ public class PessoaDTO {
         this.nomePessoa = nomePessoa;
     }
 
-    public LocalDateTime getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDateTime dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public List<Endereco> getEndereco() {
-        return endereco;
+    public List<EnderecoDTO> getEnderecos() {
+        return enderecos;
     }
 
-    public void setEndereco(List<Endereco> endereco) {
-        this.endereco = endereco;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PessoaDTO pessoaDTO = (PessoaDTO) o;
-        return idPessoa.equals(pessoaDTO.idPessoa) && Objects.equals(nomePessoa, pessoaDTO.nomePessoa) && Objects.equals(dataNascimento, pessoaDTO.dataNascimento) && Objects.equals(endereco, pessoaDTO.endereco);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idPessoa, nomePessoa, dataNascimento, endereco);
+    public void setEnderecos(List<EnderecoDTO> enderecos) {
+        this.enderecos = enderecos;
     }
 }
