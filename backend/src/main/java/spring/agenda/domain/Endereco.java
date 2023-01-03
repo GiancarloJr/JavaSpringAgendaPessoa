@@ -23,7 +23,7 @@ public class Endereco {
 
 
     @ManyToOne
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "pes_id", nullable = false)
+    @JoinColumn(name = "PESSOA_ID", referencedColumnName = "PES_ID")
     private Pessoa pessoa;
 
     public Endereco(){
