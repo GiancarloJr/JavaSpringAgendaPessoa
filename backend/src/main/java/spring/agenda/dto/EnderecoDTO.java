@@ -1,14 +1,11 @@
 package spring.agenda.dto;
 
 import spring.agenda.domain.Endereco;
-import spring.agenda.domain.Pessoa;
 
-import javax.persistence.*;
-import java.util.Objects;
 
 public class EnderecoDTO {
 
-    private Long idEndereco;
+    private Long id;
 
     private String logradouro;
 
@@ -16,34 +13,34 @@ public class EnderecoDTO {
 
     private Integer numero;
 
-    private Pessoa pessoa;
+    private Long pessoaID;
 
     public EnderecoDTO(){
 
     }
 
-    public EnderecoDTO(Long idEndereco, String logradouro, String cep, Integer numero, Pessoa pessoa) {
-        this.idEndereco = idEndereco;
+    public EnderecoDTO(Long id, String logradouro, String cep, Integer numero, Long pessoaID) {
+        this.id = id;
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
-        this.pessoa = pessoa;
+        this.pessoaID = pessoaID;
     }
 
     public EnderecoDTO(Endereco entity) {
-        this.idEndereco = entity.getIdEndereco();
+        this.id = entity.getIdEndereco();
         this.logradouro = entity.getLogradouro();
         this.cep = entity.getCep();
         this.numero = entity.getNumero();
-        this.pessoa = entity.getPessoa();
+        this.pessoaID = entity.getPessoa().getIdPessoa();
     }
 
-    public Long getIdEndereco() {
-        return idEndereco;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdEndereco(Long idEndereco) {
-        this.idEndereco = idEndereco;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogradouro() {
@@ -70,24 +67,11 @@ public class EnderecoDTO {
         this.numero = numero;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public Long getPessoaID() {
+        return pessoaID;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EnderecoDTO that = (EnderecoDTO) o;
-        return idEndereco.equals(that.idEndereco) && Objects.equals(logradouro, that.logradouro) && Objects.equals(cep, that.cep) && Objects.equals(numero, that.numero) && Objects.equals(pessoa, that.pessoa);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idEndereco, logradouro, cep, numero, pessoa);
+    public void setPessoaID(Long pessoaID) {
+        this.pessoaID = pessoaID;
     }
 }
