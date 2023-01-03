@@ -28,7 +28,7 @@ public class PessoaResource {
 
     @GetMapping("/allcompleto")
     public ResponseEntity<List<PessoaDTO>> buscarTodasPessoasMostrarContatos() {
-        return ResponseEntity.ok().body(pessoaService.buscarPessoasMostrarContatos());
+        return ResponseEntity.ok().body(pessoaService.buscarPessoasComMostrarContatos());
     }
 
 
