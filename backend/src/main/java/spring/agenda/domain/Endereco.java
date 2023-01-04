@@ -38,6 +38,13 @@ public class Endereco {
         this.pessoa = pessoa;
     }
 
+    public Endereco(Long idEndereco, String logradouro, String cep, Integer numero) {
+        this.idEndereco = idEndereco;
+        this.logradouro = logradouro;
+        this.cep = cep;
+        this.numero = numero;
+    }
+
     public Long getIdEndereco() {
         return idEndereco;
     }
