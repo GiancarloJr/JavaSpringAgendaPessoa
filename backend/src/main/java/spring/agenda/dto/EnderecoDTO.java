@@ -13,17 +13,20 @@ public class EnderecoDTO {
 
     private Integer numero;
 
+    private String cidade;
+
     private Long pessoaID;
 
     public EnderecoDTO(){
 
     }
 
-    public EnderecoDTO(Long id, String logradouro, String cep, Integer numero, Long pessoaID) {
+    public EnderecoDTO(Long id, String logradouro, String cep, Integer numero,String cidade, Long pessoaID) {
         this.id = id;
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
+        this.cidade = cidade;
         this.pessoaID = pessoaID;
     }
 
@@ -32,6 +35,7 @@ public class EnderecoDTO {
         this.logradouro = entity.getLogradouro();
         this.cep = entity.getCep();
         this.numero = entity.getNumero();
+        this.cidade = entity.getCidade();
         this.pessoaID = entity.getPessoa().getIdPessoa();
     }
 
@@ -40,6 +44,7 @@ public class EnderecoDTO {
         this.logradouro = entity.getLogradouro();
         this.cep = entity.getCep();
         this.numero = entity.getNumero();
+        this.cidade = entity.getCidade();
         this.pessoaID = pessoaID;
     }
 
@@ -81,5 +86,13 @@ public class EnderecoDTO {
 
     public void setPessoaID(Long pessoaID) {
         this.pessoaID = pessoaID;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 }
