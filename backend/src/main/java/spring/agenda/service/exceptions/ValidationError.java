@@ -1,5 +1,7 @@
 package spring.agenda.service.exceptions;
 
+import spring.agenda.resource.exceptions.FieldMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
