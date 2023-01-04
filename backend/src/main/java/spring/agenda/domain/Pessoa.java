@@ -43,6 +43,12 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
+    public Pessoa(Long idPessoa, String nomePessoa, LocalDate dataNascimento) {
+        this.idPessoa = idPessoa;
+        this.nomePessoa = nomePessoa;
+        this.dataNascimento = dataNascimento;
+    }
+
     public Long getIdPessoa() {
         return idPessoa;
     }
