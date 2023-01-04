@@ -1,4 +1,4 @@
-package spring.agenda.service.exceptions;
+package spring.agenda.resource.exceptions;
 
 public class FieldMessage {
 

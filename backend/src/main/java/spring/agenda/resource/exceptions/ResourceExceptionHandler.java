@@ -1,11 +1,13 @@
-package spring.agenda.service.exceptions;
+package spring.agenda.resource.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import spring.agenda.resource.exceptions.ObjectNotFoundException;
+import spring.agenda.service.exceptions.DataBaseException;
+import spring.agenda.service.exceptions.ResourceNotFoundException;
+import spring.agenda.service.exceptions.StandardError;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
@@ -32,6 +34,16 @@ public class ResourceExceptionHandler {
             error.setPath(request.getRequestURI());
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<StandardError> ObjectNotFound(ResourceNotFoundException e, HttpServletRequest request){
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
 //    @ExceptionHandler({MethodArgumentNotValidException.class})
