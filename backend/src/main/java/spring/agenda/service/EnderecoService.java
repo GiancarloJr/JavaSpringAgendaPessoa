@@ -9,7 +9,7 @@ import spring.agenda.dto.EnderecoDTO;
 import spring.agenda.repository.EnderecoRepository;
 import spring.agenda.repository.PessoaRepository;
 import spring.agenda.service.exceptions.DataBaseException;
-import spring.agenda.service.exceptions.ObjectNotFoundException;
+import spring.agenda.resource.exceptions.ObjectNotFoundException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -65,6 +65,7 @@ public class EnderecoService {
         entity.setCep(enderecoDTO.getCep());
         entity.setPessoa(pessoaRepository.findById(enderecoDTO.getPessoaID()).get());
         entity.setLogradouro(enderecoDTO.getLogradouro());
+        entity.setCidade(enderecoDTO.getCidade());
         entity.setNumero(enderecoDTO.getNumero());
     }
 
