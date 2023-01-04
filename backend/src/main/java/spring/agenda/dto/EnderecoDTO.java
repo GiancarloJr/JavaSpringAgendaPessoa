@@ -35,6 +35,14 @@ public class EnderecoDTO {
         this.pessoaID = entity.getPessoa().getIdPessoa();
     }
 
+    public EnderecoDTO(Endereco entity,Long pessoaID) {
+        this.id = entity.getIdEndereco();
+        this.logradouro = entity.getLogradouro();
+        this.cep = entity.getCep();
+        this.numero = entity.getNumero();
+        this.pessoaID = pessoaID;
+    }
+
     public Long getId() {
         return id;
     }

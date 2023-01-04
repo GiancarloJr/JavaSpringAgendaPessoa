@@ -1,8 +1,8 @@
 package spring.agenda.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import spring.agenda.domain.Pessoa;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +14,7 @@ public class PessoaDTO {
 
     private String dataNascimento;
 
-    private List<EnderecoDTO> enderecos;
+    private List<EnderecoDTO> enderecos = new ArrayList<>();
 
     public PessoaDTO(){
 
@@ -40,6 +40,8 @@ public class PessoaDTO {
         this.dataNascimento = entity.getDataNascimentoFormatada();
         this.enderecos = enderecos;
     }
+
+
 
     public Long getId() {
         return id;
