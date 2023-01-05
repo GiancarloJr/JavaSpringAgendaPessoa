@@ -16,13 +16,16 @@ public class Endereco {
     private String logradouro;
 
     @Column(name = "END_CEP")
-    private String cep;
+    private Integer cep;
 
     @Column(name = "END_NUMERO")
     private Integer numero;
 
     @Column(name = "END_CIDADE")
     private String cidade;
+
+    @Column(name = "END_PRINCIPAL")
+    private Boolean enderecoPrincipal;
 
     @ManyToOne
     @JoinColumn(name = "PESSOA_ID", referencedColumnName = "PES_ID")
@@ -32,21 +35,23 @@ public class Endereco {
 
     }
 
-    public Endereco(Long idEndereco, String logradouro, String cep, Integer numero,String cidade, Pessoa pessoa) {
+    public Endereco(Long idEndereco, String logradouro, Integer cep, Integer numero,String cidade,Boolean enderecoPrincipal, Pessoa pessoa) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
+        this.enderecoPrincipal = enderecoPrincipal;
         this.pessoa = pessoa;
     }
 
-    public Endereco(Long idEndereco, String logradouro, String cep, Integer numero,String cidade) {
+    public Endereco(Long idEndereco, String logradouro, Integer cep, Integer numero,String cidade,Boolean enderecoPrincipal) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
+        this.enderecoPrincipal = enderecoPrincipal;
     }
 
     public Long getIdEndereco() {
@@ -65,11 +70,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public String getCep() {
+    public Integer getCep() {
         return cep;
     }
 
-    public void setCep(String cep) {
+    public void setCep(Integer cep) {
         this.cep = cep;
     }
 
@@ -87,6 +92,14 @@ public class Endereco {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public Boolean getEnderecoPrincipal() {
+        return enderecoPrincipal;
+    }
+
+    public void setEnderecoPrincipal(Boolean enderecoPrincipal) {
+        this.enderecoPrincipal = enderecoPrincipal;
     }
 
     public String getCidade() {

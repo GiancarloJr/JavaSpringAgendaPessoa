@@ -15,7 +15,7 @@ public class EntitiesForTests {
 
     public static Pessoa createPessoa(){
         Pessoa pessoa = new Pessoa(1L,"Giancarlo",LocalDate.parse("03/12/1992", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        pessoa.getEndereco().add(new Endereco(1L,"Casa","teste",1,"Palmas",pessoa));
+        pessoa.getEndereco().add(new Endereco(1L,"Casa",12345,1,"Palmas",true,pessoa));
         return pessoa;
     }
 
@@ -26,7 +26,7 @@ public class EntitiesForTests {
     }
 
     public static Endereco createEndereco(){
-        Endereco endereco = new Endereco(1L,"Casa","teste",1,"Palmas");
+        Endereco endereco = new Endereco(1L,"Casa",12345,1,"Palmas",true);
         return endereco;
     }
 

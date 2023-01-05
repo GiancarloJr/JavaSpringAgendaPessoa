@@ -2,6 +2,8 @@ package spring.agenda.dto;
 
 import spring.agenda.domain.Endereco;
 
+import javax.persistence.Column;
+
 
 public class EnderecoDTO {
 
@@ -9,11 +11,13 @@ public class EnderecoDTO {
 
     private String logradouro;
 
-    private String cep;
+    private Integer cep;
 
     private Integer numero;
 
     private String cidade;
+
+    private Boolean enderecoPrincipal;
 
     private Long pessoaID;
 
@@ -21,12 +25,13 @@ public class EnderecoDTO {
 
     }
 
-    public EnderecoDTO(Long id, String logradouro, String cep, Integer numero,String cidade, Long pessoaID) {
+    public EnderecoDTO(Long id, String logradouro, Integer cep, Integer numero,String cidade,Boolean enderecoPrincipal, Long pessoaID) {
         this.id = id;
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
+        this.enderecoPrincipal = enderecoPrincipal;
         this.pessoaID = pessoaID;
     }
 
@@ -36,6 +41,7 @@ public class EnderecoDTO {
         this.cep = entity.getCep();
         this.numero = entity.getNumero();
         this.cidade = entity.getCidade();
+        this.enderecoPrincipal = entity.getEnderecoPrincipal();
         this.pessoaID = entity.getPessoa().getIdPessoa();
     }
 
@@ -45,6 +51,7 @@ public class EnderecoDTO {
         this.cep = entity.getCep();
         this.numero = entity.getNumero();
         this.cidade = entity.getCidade();
+        this.enderecoPrincipal = entity.getEnderecoPrincipal();
         this.pessoaID = pessoaID;
     }
 
@@ -64,11 +71,11 @@ public class EnderecoDTO {
         this.logradouro = logradouro;
     }
 
-    public String getCep() {
+    public Integer getCep() {
         return cep;
     }
 
-    public void setCep(String cep) {
+    public void setCep(Integer cep) {
         this.cep = cep;
     }
 
@@ -94,5 +101,13 @@ public class EnderecoDTO {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public Boolean getEnderecoPrincipal() {
+        return enderecoPrincipal;
+    }
+
+    public void setEnderecoPrincipal(Boolean enderecoPrincipal) {
+        this.enderecoPrincipal = enderecoPrincipal;
     }
 }

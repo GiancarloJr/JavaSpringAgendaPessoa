@@ -74,6 +74,7 @@ public class EnderecoService {
         entity.setPessoa(pessoaRepository.findById(enderecoDTO.getPessoaID()).get());
         entity.setLogradouro(enderecoDTO.getLogradouro());
         entity.setCidade(enderecoDTO.getCidade());
+        entity.setEnderecoPrincipal(enderecoDTO.getEnderecoPrincipal());
         entity.setNumero(enderecoDTO.getNumero());
     }
 
