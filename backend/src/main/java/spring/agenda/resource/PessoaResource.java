@@ -17,34 +17,39 @@ public class PessoaResource {
     private PessoaService pessoaService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<PessoaDTO> buscarPessoaPorId(@PathVariable Long id) {
+    public ResponseEntity<PessoaDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(pessoaService.findByID(id));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<PessoaDTO>> buscarTodasPessoasSemMostrarContatos() {
+    public ResponseEntity<List<PessoaDTO>> findAllWithoutContats() {
         return ResponseEntity.ok().body(pessoaService.buscarPessoasSemMostrarContatos());
     }
 
-    @GetMapping("/allcompleto")
-    public ResponseEntity<List<PessoaDTO>> buscarTodasPessoasMostrarContatos() {
+    @GetMapping("/allcomplet")
+    public ResponseEntity<List<PessoaDTO>> findAllWithContats() {
         return ResponseEntity.ok().body(pessoaService.buscarPessoasComMostrarContatos());
     }
 
 
     @PostMapping("/")
-    public ResponseEntity<PessoaDTO> adicionarPessoa(@Valid @RequestBody PessoaDTO pessoaDTO) {
+    public ResponseEntity<PessoaDTO> savePessoa(@Valid @RequestBody PessoaDTO pessoaDTO) {
         return ResponseEntity.ok().body(pessoaService.salvarPessoa(pessoaDTO));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PessoaDTO> atualizarPessoa(@PathVariable Long id, @Valid @RequestBody PessoaDTO pessoaDTO) {
+    public ResponseEntity<PessoaDTO> updatePessoa(@PathVariable Long id, @Valid @RequestBody PessoaDTO pessoaDTO) {
         return ResponseEntity.ok().body(pessoaService.atualizarPessoa(id, pessoaDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarPessoa(@PathVariable("id") Long id) {
         pessoaService.deletarPessoa(id);
+        return ResponseEntity.noContent().build();
+    }
+    @DeleteMapping("/deletewithcontats/{id}")
+    public ResponseEntity<Void> deletarPessoaComContatos(@PathVariable("id") Long id) {
+        pessoaService.deletarPessoaEContatosDireto(id);
         return ResponseEntity.noContent().build();
     }
 }

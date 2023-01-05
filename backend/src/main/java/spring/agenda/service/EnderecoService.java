@@ -25,39 +25,47 @@ public class EnderecoService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public EnderecoDTO buscarPorId(Long id) {
+    public EnderecoDTO findById(Long id) {
         try {
             Optional<Endereco> entity = enderecoRepository.findById(id);
             return new EnderecoDTO(entity.get());
         } catch (NoSuchElementException e) {
-            throw new ObjectNotFoundException("Endereco NAO ENCONTRADO");
+            throw new ObjectNotFoundException("ENDERECO NAO ENCONTRADO");
         }
     }
 
-    public List<EnderecoDTO> buscarTodos() {
+    public List<EnderecoDTO> findAll() {
         List<Endereco> list = enderecoRepository.findAll();
         return list.stream().map(x -> new EnderecoDTO(x)).collect(Collectors.toList());
     }
 
-    public EnderecoDTO salvarEndereco(EnderecoDTO enderecoDTO) {
+    public EnderecoDTO saveEndereco(EnderecoDTO enderecoDTO) {
         validacaoPessoa(enderecoDTO);
         try {
             Endereco entity = new Endereco();
             convertDTOtoEntity(entity, enderecoDTO);
             return new EnderecoDTO(enderecoRepository.save(entity));
         } catch (NullPointerException e) {
-            throw new ObjectNotFoundException("EMAIL DE USUARIO INEXISTENTE");
+            throw new ObjectNotFoundException("PESSOA NAO EXISTE, FAVOR CADASTRAR");
         }
     }
 
-    public EnderecoDTO atualizarEndereco(Long id, EnderecoDTO enderecoDTO) {
+    public EnderecoDTO updateEndereco(Long id, EnderecoDTO enderecoDTO) {
         validacaoPessoa(enderecoDTO);
         try {
             Optional<Endereco> entity = enderecoRepository.findById(id);
             convertDTOtoEntity(entity.get(), enderecoDTO);
             return new EnderecoDTO(enderecoRepository.save(entity.get()));
         } catch (NullPointerException e) {
-            throw new ObjectNotFoundException("Endereco NAO ENCONTRADO");
+            throw new ObjectNotFoundException("ENDERECO NAO ENCONTRADO");
+        }
+    }
+
+    public void deleteEnderecoById(Long id) {
+        try {
+            enderecoRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ObjectNotFoundException("ENDERECO NAO ENCONTRADO");
         }
     }
 
@@ -69,15 +77,7 @@ public class EnderecoService {
         entity.setNumero(enderecoDTO.getNumero());
     }
 
-    public void deletarEndereco(Long id) {
-        try {
-            enderecoRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ObjectNotFoundException("Endereco NAO ENCONTRADO");
-        }
-    }
-
-    public void validacaoPessoa(EnderecoDTO enderecoDTO){
-        Pessoa pessoa = pessoaRepository.findById(enderecoDTO.getPessoaID()).orElseThrow(()-> new DataBaseException("EMAIL NÃO CADASTRADO"));
+    public void validacaoPessoa(EnderecoDTO enderecoDTO) {
+        Pessoa pessoa = pessoaRepository.findById(enderecoDTO.getPessoaID()).orElseThrow(() -> new DataBaseException("PESSOA NAO ENCONTRADA"));
     }
 }
