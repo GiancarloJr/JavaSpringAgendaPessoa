@@ -16,27 +16,29 @@ import java.time.Instant;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<StandardError> ObjectNotFound(ObjectNotFoundException e, HttpServletRequest request){
-            StandardError error = new StandardError();
-            error.setTimestamp(Instant.now());
-            error.setStatus(HttpStatus.NOT_FOUND.value());
-            error.setMessage(e.getMessage());
-            error.setPath(request.getRequestURI());
+    public ResponseEntity<StandardError> ObjectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
     @ExceptionHandler(DataBaseException.class)
-    public ResponseEntity<StandardError> DataBaseException(DataBaseException e, HttpServletRequest request){
-            StandardError error = new StandardError();
-            error.setTimestamp(Instant.now());
-            error.setStatus(HttpStatus.BAD_REQUEST.value());
-            error.setMessage(e.getMessage());
-            error.setPath(request.getRequestURI());
+    public ResponseEntity<StandardError> DataBaseException(DataBaseException e, HttpServletRequest request) {
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
+
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<StandardError> ObjectNotFound(ResourceNotFoundException e, HttpServletRequest request){
+    public ResponseEntity<StandardError> ObjectNotFound(ResourceNotFoundException e, HttpServletRequest request) {
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(HttpStatus.NOT_FOUND.value());
