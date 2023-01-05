@@ -13,6 +13,7 @@ import spring.agenda.service.exceptions.DataBaseException;
 import spring.agenda.resource.exceptions.ObjectNotFoundException;
 import spring.agenda.service.exceptions.ResourceNotFoundException;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -82,6 +83,7 @@ public class PessoaService {
         }
     }
 
+    @Transactional
     public void deletarPessoaEContatosDireto(Long id) {
         try {
             enderecoRepository.deleteAllByPessoa(pessoaRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("PESSOA NAO ENCONTRADA")));

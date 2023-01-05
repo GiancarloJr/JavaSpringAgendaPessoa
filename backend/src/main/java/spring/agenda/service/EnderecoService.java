@@ -56,7 +56,7 @@ public class EnderecoService {
             Optional<Endereco> entity = enderecoRepository.findById(id);
             convertDTOtoEntity(entity.get(), enderecoDTO);
             return new EnderecoDTO(enderecoRepository.save(entity.get()));
-        } catch (NullPointerException e) {
+        } catch (NoSuchElementException e) {
             throw new ObjectNotFoundException("ENDERECO NAO ENCONTRADO");
         }
     }
