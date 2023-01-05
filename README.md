@@ -4,8 +4,6 @@ GIANCARLO SENA MARTINS JUNIOR
 
 EMAIL: giancarlo456@hotmail.com
 
-TELEFONE: (64) 999970059
-
 LINKEDIN: [Giancarlo Sena Martins Júnior | LinkedIn](https://www.linkedin.com/in/giancarlosmj/)
 
 
