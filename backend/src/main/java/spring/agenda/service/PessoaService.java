@@ -82,6 +82,17 @@ public class PessoaService {
         }
     }
 
+    public void deletarPessoaEContatosDireto(Long id) {
+        try {
+            enderecoRepository.deleteAllByPessoa(pessoaRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("PESSOA NAO ENCONTRADA")));
+            pessoaRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException("PESSOA NÃO ENCONTRADA");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataBaseException("EXISTEM CONTATOS VINCULADOS A PESSOA, EXCLUIR CONTATOS PRIMEIRO");
+        }
+    }
+
     public void convertDTOtoEntity(Pessoa entity, PessoaDTO pessoaDTO) {
         entity.setNomePessoa(pessoaDTO.getNomePessoa());
         entity.setDataNascimento(LocalDate.parse(pessoaDTO.getDataNascimento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
