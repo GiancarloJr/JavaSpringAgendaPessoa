@@ -113,20 +113,34 @@ SCRIPT BANCOS:
 
 
 CREATE TABLE IF NOT EXISTS PESSOAS (
+
                                        PES_ID SERIAL PRIMARY KEY NOT NULL,
+				       
                                        PES_NAME VARCHAR(100) NOT NULL,
+				       
                                        PES_DATA_NASCIMENTO DATE NOT NULL
+				       
 );
 
+
 CREATE TABLE IF NOT EXISTS ENDERECOS(
+
                                        END_ID SERIAL PRIMARY KEY NOT NULL,
+				       
                                        END_LOGRADOURO VARCHAR(100) NOT NULL,
+				       
                                        END_CEP INT NOT NULL,
+				       
                                        END_NUMERO INT NOT NULL,
+				       
                                        END_CIDADE VARCHAR(50) NOT NULL,
-		          END_PRINCIPAL BOOLEAN,
+				       
+		                       END_PRINCIPAL BOOLEAN,
+			  
                                        PESSOA_ID INT NOT NULL,
+				       
                                        FOREIGN KEY (PESSOA_ID) REFERENCES PESSOAS (PES_ID)
+				       
 );
 
 
