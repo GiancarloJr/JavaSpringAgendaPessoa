@@ -6,10 +6,7 @@ EMAIL: giancarlo456@hotmail.com
 
 LINKEDIN: [Giancarlo Sena Martins Júnior | LinkedIn](https://www.linkedin.com/in/giancarlosmj/)
 
-
-Avaliação Desenvolvedor Back-end Attornatus
-
-O objetivo deste documento é identificar seus conhecimentos quanto às tecnologias utilizadas no cotidiano de desenvolvimento da equipe de Back-end na Attornatus Procuradoria Digital.
+O objetivo deste documento é identificar seus conhecimentos quanto às tecnologias utilizadas no cotidiano de desenvolvimento da equipe de Back-end 
 
 Esta análise propõe avaliar os seguintes temas: 
 
