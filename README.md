@@ -95,6 +95,10 @@ Será levado em avaliação
 
 INFORMAÇÕES PARA ACESSO DE API
 
+COLLECTION POSTMAN
+
+https://api.postman.com/collections/21708394-baf663bf-66f8-464e-ae7b-7b0c89b8180b?access_key=PMAT-01GP05PSTFYP2V3HEEBMC8ATA8
+
 LINK GITHUB: 
 
 GiancarloJr/JavaSpringAgendaPessoa (github.com)
