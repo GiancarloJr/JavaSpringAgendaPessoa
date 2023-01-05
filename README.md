@@ -30,8 +30,11 @@ Desafio Java
 
 Usando Spring boot, crie uma API simples para gerenciar Pessoas. Esta API deve permitir:  
 •	Criar uma pessoa
+
 •	Editar uma pessoa
+
 •	Consultar uma pessoa
+
 •	Listar pessoas
 •	Criar endereço para pessoa
 •	Listar endereços da pessoa
