@@ -10,35 +10,35 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/endereco")
+@RequestMapping("/enderecos")
 public class EnderecoResource {
 
     @Autowired
     private EnderecoService enderecoService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<EnderecoDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok().body(enderecoService.buscarPorId(id));
+    public ResponseEntity<EnderecoDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(enderecoService.findById(id));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<EnderecoDTO>> buscarTodos() {
-        return ResponseEntity.ok().body(enderecoService.buscarTodos());
+    public ResponseEntity<List<EnderecoDTO>> findAll() {
+        return ResponseEntity.ok().body(enderecoService.findAll());
     }
 
     @PostMapping("/")
-    public ResponseEntity<EnderecoDTO> inserir(@Valid @RequestBody EnderecoDTO enderecoDTO) {
-        return ResponseEntity.ok().body(enderecoService.salvarEndereco(enderecoDTO));
+    public ResponseEntity<EnderecoDTO> save(@Valid @RequestBody EnderecoDTO enderecoDTO) {
+        return ResponseEntity.ok().body(enderecoService.saveEndereco(enderecoDTO));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<EnderecoDTO> atualizar(@PathVariable Long id, @Valid @RequestBody EnderecoDTO enderecoDTO) {
-        return ResponseEntity.ok().body(enderecoService.atualizarEndereco(id, enderecoDTO));
+    public ResponseEntity<EnderecoDTO> update(@PathVariable Long id, @Valid @RequestBody EnderecoDTO enderecoDTO) {
+        return ResponseEntity.ok().body(enderecoService.updateEndereco(id, enderecoDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable("id") Long id) {
-        enderecoService.deletarEndereco(id);
+        enderecoService.deleteEnderecoById(id);
         return ResponseEntity.noContent().build();
     }
 
