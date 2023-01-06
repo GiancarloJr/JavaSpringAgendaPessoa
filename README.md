@@ -94,6 +94,8 @@ INFORMAÇÕES PARA ACESSO DE API
 
 COLLECTION POSTMAN
 
+https://api.postman.com/collections/21708394-d366801c-ae03-42f6-b40b-a07bce9cc351?access_key=PMAT-01GP3SVG7AV8P91DDWDSVB86E6
+
 LINK GITHUB: 
 
 GiancarloJr/JavaSpringAgendaPessoa (github.com)
