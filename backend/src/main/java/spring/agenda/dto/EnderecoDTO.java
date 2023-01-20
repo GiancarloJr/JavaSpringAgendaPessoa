@@ -2,9 +2,6 @@ package spring.agenda.dto;
 
 import spring.agenda.domain.Endereco;
 
-import javax.persistence.Column;
-
-
 public class EnderecoDTO {
 
     private Long id;
