@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spring.agenda.dto.EnderecoDTO;
+import spring.agenda.dto.EnderecoVIACEP;
+import spring.agenda.repository.APICep;
 import spring.agenda.service.EnderecoService;
 
 import javax.validation.Valid;
@@ -15,6 +17,15 @@ public class EnderecoResource {
 
     @Autowired
     private EnderecoService enderecoService;
+
+    @Autowired
+    private APICep apiCep;
+
+    @GetMapping("/cep/{cep}")
+    public ResponseEntity<EnderecoVIACEP> getCep(@PathVariable("cep") String cep) {
+        EnderecoVIACEP endereco = apiCep.buscaEnderecoPorCEP(cep);
+        return ResponseEntity.ok().body(endereco);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<EnderecoDTO> findById(@PathVariable Long id) {
